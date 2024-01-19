@@ -1,0 +1,239 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: noto-sans, sans-serif;
+}
+
+.pokemon-ambient-wall {
+  width: 100%;
+  height: 100vh; /* Adjust the height as needed */
+  animation: ambientAnimation 20s ease infinite;
+  background: linear-gradient(
+    125deg, /* Adjust the angle for more randomness */
+    #ff4422, /* fire */
+    #00cc33, /* grass */
+    #3399ff, /* water */
+    #ff99cc, /* fairy */
+    #ffcc33, /* electric */
+    #ff5599, /* psychic */
+    #775544  /* dark */
+    /* You can shuffle these colors or add more to increase randomness */
+  );
+  background-size: 300% 300%;
+}
+
+@keyframes ambientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 25%; /* Change background position */
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 75%; /* Change background position */
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+.navigation-search {
+  max-width: 800px;
+  height: 120px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid green;
+}
+
+.navigation-search img {
+  height: 100px;
+  width: auto;
+}
+
+#pokemon-animation {
+  width: 200px;
+
+  margin: 10px -20px -20px 0px;
+}
+
+.card-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.search {
+  margin-top: 10px;
+  --offset: 3px;
+  background: #f5cc07;
+  border-radius: 50px;
+  position: relative;
+  height: 40px;
+  width: 200px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.search input::placeholder {
+  color: #3e7dc9;
+}
+
+.search input:focus {
+  outline: none; /* Removes the default focus outline */
+  border: none; /* Removes any border set on the input */
+}
+
+/* Conic gradient */
+.search::before {
+  content: '';
+  background: conic-gradient(transparent 270deg, white, transparent);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  aspect-ratio: 1;
+  width: 100%;
+  animation: rotate 2s linear infinite;
+}
+
+/* Overlay */
+.search::after {
+  content: '';
+  background: inherit;
+  border-radius: inherit;
+  position: absolute;
+  inset: var(--offset);
+  height: calc(100% - 2 * var(--offset));
+  width: calc(100% - 2 * var(--offset));
+}
+
+.search input {
+  background: transparent;
+  color: #3e7dc9;
+  font-size: 14px;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  padding: 12px 16px;
+  border: none;
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) scale(1.4) rotate(0turn);
+  }
+
+  to {
+    transform: translate(-50%, -50%) scale(1.4) rotate(1turn);
+  }
+}
+
+.pokemon-card-small {
+  width: 150px;
+  height: 250px;
+  /* margin: 6px auto; */
+  /* padding: 10px; */
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* color: white; */
+  background-color: #00cc33;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.pokemon-card-small2 {
+  width: 150px;
+  height: 250px;
+  /* margin: 6px auto; */
+  /* padding: 10px; */
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* color: white; */
+  background-color: #ff4422;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.pokemon-card-small img {
+  width: 50px;
+  height: auto;
+  /* margin: 10px; */
+}
+
+.imagecontainer-card-small {
+  /* background-color: #DEFDE0; */
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 80%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+.info-card-small {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-card-small h3 {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 10px;
+  color: rgb(57, 57, 57);
+}
+
+.info-card-small .number {
+  font-size: 15px;
+  font-weight: 300;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 40%;
+  padding: 6px 12px;
+  color: rgb(57, 57, 57);
+  
+}
+
+.info-card-small small{
+  color: rgb(57, 57, 57);
+}
+
+#FF4422, /* fire */
+#00CC33, /* grass */
+#FFCC33, /* electric */
+#3399FF, /* water */
+#CC9966, /* ground */
+#B6A136, /* rock */
+#FF99CC, /* fairy */
+#AA5599, /* poison */
+#AABB22, /* bug */
+#7766EE, /* dragon */
+#FF5599, /* psychic */
+#8899FF, /* flying */
+#BB5544, /* fighting */
+#AAAA99, /* normal */
+#66CCFF, /* ice */
+#6666BB, /* ghost */
+#AAAABB, /* steel */
+#775544  /* dark */
