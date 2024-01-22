@@ -4,14 +4,19 @@
   box-sizing: border-box;
 }
 
-body {
-  height: 100vh;
-  font-family: noto-sans, sans-serif;
+
+
+h1{
+  font-size: 40px;
+  font-weight: 600;
+
 }
 
-.pokemon-ambient-wall {
+body {
+  font-family: noto-sans, sans-serif;
+
   width: 100%;
-  height: 100vh; /* Adjust the height as needed */
+  height: 100%; 
   animation: ambientAnimation 20s ease infinite;
   background: linear-gradient(
     125deg, /* Adjust the angle for more randomness */
@@ -53,7 +58,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid green;
+  /* border: 1px solid green; */
 }
 
 .navigation-search img {
@@ -63,15 +68,16 @@ body {
 
 #pokemon-animation {
   width: 200px;
+  
 
   margin: 10px -20px -20px 0px;
 }
 
 .card-container {
-  max-width: 1100px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 10px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,8 +152,8 @@ body {
 }
 
 .pokemon-card-small {
-  width: 150px;
-  height: 250px;
+  width: 300px;
+  height: 400px;
   /* margin: 6px auto; */
   /* padding: 10px; */
   border-radius: 20px;
@@ -159,9 +165,10 @@ body {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
+
 .pokemon-card-small2 {
-  width: 150px;
-  height: 250px;
+  width: 300px;
+  height: 400px;
   /* margin: 6px auto; */
   /* padding: 10px; */
   border-radius: 20px;
@@ -173,23 +180,46 @@ body {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
-.pokemon-card-small img {
-  width: 50px;
-  height: auto;
-  /* margin: 10px; */
-}
+
+ 
 
 .imagecontainer-card-small {
-  /* background-color: #DEFDE0; */
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  width: 80%;
-  height: 40%;
+  width: 70%;
+  height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 25px;
   margin-bottom: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+
+}
+
+.imagecontainer-card-small img {
+  width: 150px;
+  height: auto;
+  
+}
+
+
+/* .imagecontainer-animation-card-small {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 100px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+} */
+
+.imagecontainer-animation-card-small img {
+  width: auto;
+  height: 60px;
+  margin-right:6px;
+
 }
 
 .info-card-small {
@@ -200,40 +230,30 @@ body {
 
 .info-card-small h3 {
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 600;
   margin: 10px;
   color: rgb(57, 57, 57);
 }
 
 .info-card-small .number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 15px;
   font-weight: 300;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 40%;
-  padding: 6px 12px;
+  /* background-color: rgba(255, 255, 255, 0.5); */
+  border-radius: 50%;
+  /* padding: 22px 22px; */
   color: rgb(57, 57, 57);
   
+}
+
+.type{
+  margin-top: 6px;
+  font-size: 16px;
 }
 
 .info-card-small small{
   color: rgb(57, 57, 57);
 }
 
-#FF4422, /* fire */
-#00CC33, /* grass */
-#FFCC33, /* electric */
-#3399FF, /* water */
-#CC9966, /* ground */
-#B6A136, /* rock */
-#FF99CC, /* fairy */
-#AA5599, /* poison */
-#AABB22, /* bug */
-#7766EE, /* dragon */
-#FF5599, /* psychic */
-#8899FF, /* flying */
-#BB5544, /* fighting */
-#AAAA99, /* normal */
-#66CCFF, /* ice */
-#6666BB, /* ghost */
-#AAAABB, /* steel */
-#775544  /* dark */
