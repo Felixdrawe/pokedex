@@ -92,7 +92,7 @@ body {
 }
 
 .search input::placeholder {
-  color: #3e7dc9;
+  color: rgb(57, 57, 57);
 }
 
 .search input:focus {
@@ -126,7 +126,7 @@ body {
 
 .search input {
   background: transparent;
-  color: #3e7dc9;
+  color: rgb(57, 57, 57);
   font-size: 14px;
   position: absolute;
   inset: 0;
