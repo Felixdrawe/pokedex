@@ -24,7 +24,7 @@ const bgcolors = {
 console.log(bgcolors.fire);
 
 async function loadPokemon() {
-  const url = 'https://pokeapi.co/api/v2/pokemon/venusaur';
+  const url = 'https://pokeapi.co/api/v2/pokemon/pikachu';
   const response = await fetch(url);
   currentPokemon = await response.json();
   console.log(currentPokemon);
@@ -32,14 +32,14 @@ async function loadPokemon() {
 }
 
 function renderPokemonInfo() {
-  const imageEl = document.getElementById('image');
-  const numberEl = document.getElementById('number');
-  const nameEl = document.getElementById('name');
-  const typeEl = document.getElementById('type');
-  const heightEl = document.getElementById('height');
-  const weightEl = document.getElementById('weight');
-  const abilitiesEl = document.getElementById('ability');
-  const movesEl = document.getElementById('moves');
+  const imageEl = document.getElementById('image-el');
+  const numberEl = document.getElementById('number-el');
+  const nameEl = document.getElementById('name-el');
+  const typeEl = document.getElementById('type-el');
+  const heightEl = document.getElementById('height-el');
+  const weightEl = document.getElementById('weight-el');
+  const abilitiesEl = document.getElementById('ability-el');
+  const movesEl = document.getElementById('moves-el');
 
   imageEl.src = currentPokemon.sprites.other.dream_world.front_default;
   numberEl.innerHTML = `# ${currentPokemon.id}`;
@@ -60,7 +60,7 @@ function pokemonTypes() {
   let typesString = '';
   for (let j = 0; j < currentPokemon.types.length; j++) {
     let types = currentPokemon.types[j].type.name;
-    typesString += types.charAt(0).toUpperCase() + types.slice(1);
+    typesString += capitalize(types)
     if (j < currentPokemon.types.length - 1) {
       typesString += ' / ';
     }
@@ -82,7 +82,7 @@ function pokemonAbilities() {
   let abilitiesString = '';
   for (let i = 0; i < currentPokemon.abilities.length; i++) {
     let abilities = currentPokemon.abilities[i].ability.name;
-    abilitiesString += abilities.charAt(0).toUpperCase() + abilities.slice(1);
+    abilitiesString += capitalize(abilities);
     if (i < currentPokemon.abilities.length - 1) {
       abilitiesString += ' / ';
     }
@@ -98,7 +98,7 @@ function pokemonTypes() {
   let typesString = '';
   for (let j = 0; j < currentPokemon.types.length; j++) {
     let types = currentPokemon.types[j].type.name;
-    typesString += types.charAt(0).toUpperCase() + types.slice(1);
+    typesString += capitalize(types);
     if (j < currentPokemon.types.length - 1) {
       typesString += ' / ';
     }
@@ -115,7 +115,7 @@ function pokemonMoves() {
   let movesString = '';
   for (let k = 0; k < currentPokemon.moves.length; k++) {
     let moves = currentPokemon.moves[k].move.name;
-    movesString += moves.charAt(0).toUpperCase() + moves.slice(1);
+    movesString += capitalize(moves) + '<br>';
   }
   console.log(movesString);
   return movesString;
