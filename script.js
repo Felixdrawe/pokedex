@@ -1,8 +1,10 @@
 function init() {
-  loadPokemon();
+  loadPokemons();
 }
 
-let currentPokemon;
+const LOADMAX = 15;
+let allPokemons = [];
+let loadStartIndex = 0; // Starting index for loading pokemons
 
 const bgcolors = {
   fire: '#FF4422',
@@ -25,100 +27,87 @@ const bgcolors = {
   dark: '#775544',
 };
 
-// console.log(bgcolors.fire);
-
-async function loadPokemon() {
-  const url = 'https://pokeapi.co/api/v2/pokemon/pikachu';
-  const response = await fetch(url);
-  currentPokemon = await response.json();
-  console.log(currentPokemon);
-  renderSmallCards();
+// Load the first 15 pokemons
+async function loadPokemons() {
+  for (let i = loadStartIndex; i < loadStartIndex + LOADMAX; i++) {
+    const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+    try {
+      const response = await fetch(url);
+      const pokemonData = await response.json();
+      allPokemons.push(pokemonData);
+    } catch (error) {
+      console.error('Error fetching Pokémon data:', error);
+    }
+  }
+  renderSmallCards(allPokemons);
+  loadStartIndex += LOADMAX; // Update the starting index for the next load
 }
 
-// function renderPokemonInfo() {
-
-//   const imageEl = document.getElementById('image-el');
-//   const animationEl = document.getElementById('animation-el');
-//   const numberEl = document.getElementById('number-el');
-//   const nameEl = document.getElementById('name-el');
-//   const typeEl = document.getElementById('type-el');
-//   const heightEl = document.getElementById('height-el');
-//   const weightEl = document.getElementById('weight-el');
-//   const abilitiesEl = document.getElementById('ability-el');
-//   const movesEl = document.getElementById('moves-el');
-//   const bgEl = document.getElementById('bg-color-el');
-
-//   imageEl.src = currentPokemon.sprites.other.dream_world.front_default;
-//   animationEl.src = `https://raw.githubusercontent.com/geekygreek7/animated-pokemon-gifs/master/${currentPokemon.id}.gif`;
-//   numberEl.innerHTML = `# ${currentPokemon.id}`;
-//   nameEl.innerHTML = `Name: ${capitalize(currentPokemon.name)}`;
-//   typeEl.innerHTML = `Type: ${pokemonTypes()}`;
-//   heightEl.innerHTML = `Height: ${currentPokemon.height}`;
-//   weightEl.innerHTML = `Weight: ${currentPokemon.weight}`;
-//   abilitiesEl.innerHTML = `Abilities: ${pokemonAbilities()}`;
-//   movesEl.innerHTML = `${pokemonMoves()}`;
-//   bgEl.style.backgroundColor = `${backgroundColor()}`;
-// }
+// Infinite scroll implementation
+window.addEventListener('scroll', () => {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    loadPokemons();
+  }
+});
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function pokemonTypes() {
+function pokemonTypes(pokemon) {
   let typesString = '';
-  for (let j = 0; j < currentPokemon.types.length; j++) {
-    let types = currentPokemon.types[j].type.name;
+  for (let j = 0; j < pokemon.types.length; j++) {
+    let types = pokemon.types[j].type.name;
     typesString += capitalize(types);
-    if (j < currentPokemon.types.length - 1) {
+    if (j < pokemon.types.length - 1) {
       typesString += ' / ';
     }
   }
-
-  //   console.log(typesString);
   return typesString;
 }
 
-function backgroundColor() {
-  // const color = colors[currentPokemon.types[0].type.name];
-  const colortype = currentPokemon.types[0].type.name;
-  console.log(colortype);
+function backgroundColor(pokemon) {
+  const colortype = pokemon.types[0].type.name;
   return bgcolors[colortype];
 }
 
-function pokemonAbilities() {
+function pokemonAbilities(pokemon) {
   let abilitiesString = '';
-  for (let i = 0; i < currentPokemon.abilities.length; i++) {
-    let abilities = currentPokemon.abilities[i].ability.name;
+  for (let i = 0; i < pokemon.abilities.length; i++) {
+    let abilities = pokemon.abilities[i].ability.name;
     abilitiesString += capitalize(abilities);
-    if (i < currentPokemon.abilities.length - 1) {
+    if (i < pokemon.abilities.length - 1) {
       abilitiesString += ' / ';
     }
   }
-
-  //   console.log(abilitiesString);
   return abilitiesString;
 }
 
-function pokemonTypes() {
-  let typesString = '';
-  for (let j = 0; j < currentPokemon.types.length; j++) {
-    let types = currentPokemon.types[j].type.name;
-    typesString += capitalize(types);
-    if (j < currentPokemon.types.length - 1) {
-      typesString += ' / ';
-    }
-  }
-
-  //   console.log(typesString);
-  return typesString;
-}
-
-function pokemonMoves() {
+function pokemonMoves(pokemon) {
   let movesString = '';
-  for (let k = 0; k < currentPokemon.moves.length; k++) {
-    let moves = currentPokemon.moves[k].move.name;
+  for (let k = 0; k < pokemon.moves.length; k++) {
+    let moves = pokemon.moves[k].move.name;
     movesString += capitalize(moves) + '<br>';
   }
-  //   console.log(movesString);
   return movesString;
 }
+
+
+
+
+// Assuming you have already loaded some Pokémon into `allPokemons`
+
+document.getElementById('searchInput').addEventListener('input', function(e) {
+    // Get the current input value and convert it to lowercase
+    const searchText = e.target.value.toLowerCase();
+  
+    // Filter the `allPokemons` array based on the search text
+    const filteredPokemons = allPokemons.filter(function(pokemon) { 
+      return pokemon.name.toLowerCase().includes(searchText);
+    });
+  
+    // Call the `renderSmallCards` function with the filtered results
+    renderSmallCards(filteredPokemons);
+  });
+  
+  

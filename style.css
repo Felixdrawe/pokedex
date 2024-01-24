@@ -4,30 +4,27 @@
   box-sizing: border-box;
 }
 
-
-
-h1{
+h1 {
   font-size: 40px;
   font-weight: 600;
-
 }
 
 body {
   font-family: noto-sans, sans-serif;
 
   width: 100%;
-  height: 100%; 
-  animation: ambientAnimation 20s ease infinite;
+  height: 100%;
+  animation: ambientAnimation 16s ease infinite;
   background: linear-gradient(
-    125deg, /* Adjust the angle for more randomness */
-    #ff4422, /* fire */
-    #00cc33, /* grass */
-    #3399ff, /* water */
-    #ff99cc, /* fairy */
-    #ffcc33, /* electric */
-    #ff5599, /* psychic */
-    #775544  /* dark */
-    /* You can shuffle these colors or add more to increase randomness */
+    125deg,
+    /* Adjust the angle for more randomness */ #ff4422,
+    /* fire */ #00cc33,
+    /* grass */ #3399ff,
+    /* water */ #ff99cc,
+    /* fairy */ #ffcc33,
+    /* electric */ #ff5599,
+    /* psychic */ #775544 /* dark */
+      /* You can shuffle these colors or add more to increase randomness */
   );
   background-size: 300% 300%;
 }
@@ -50,7 +47,6 @@ body {
   }
 }
 
-
 .navigation-search {
   max-width: 800px;
   height: 120px;
@@ -68,18 +64,18 @@ body {
 
 #pokemon-animation {
   width: 200px;
-  
 
   margin: 10px -20px -20px 0px;
 }
 
 .card-container {
   max-width: 1300px;
+  min-height: 80vh;
   margin: 0 auto;
   padding: 10px;
   /* border: 1px solid red; */
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   flex-wrap: wrap;
   gap: 16px;
@@ -165,7 +161,6 @@ body {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
-
 .pokemon-card-small2 {
   width: 300px;
   height: 400px;
@@ -180,9 +175,6 @@ body {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 
-
- 
-
 .imagecontainer-card-small {
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
@@ -194,15 +186,12 @@ body {
   margin-top: 25px;
   margin-bottom: 20px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-
 }
 
 .imagecontainer-card-small img {
   width: 150px;
   height: auto;
-  
 }
-
 
 /* .imagecontainer-animation-card-small {
   background-color: rgba(255, 255, 255, 0.5);
@@ -218,8 +207,7 @@ body {
 .imagecontainer-animation-card-small img {
   width: auto;
   height: 60px;
-  margin-right:6px;
-
+  margin-right: 6px;
 }
 
 .info-card-small {
@@ -245,15 +233,13 @@ body {
   border-radius: 50%;
   /* padding: 22px 22px; */
   color: rgb(57, 57, 57);
-  
 }
 
-.type{
+.type {
   margin-top: 6px;
   font-size: 16px;
 }
 
-.info-card-small small{
+.info-card-small small {
   color: rgb(57, 57, 57);
 }
-

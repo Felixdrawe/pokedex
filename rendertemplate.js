@@ -1,26 +1,27 @@
-function renderSmallCards() {
+function renderSmallCards(pokemons) {
   const smallCards = document.getElementById('small-cards-el');
+  smallCards.innerHTML = ''; // Clear previous content
 
-  smallCards.innerHTML = /*html*/ `
-      <div class="pokemon-card-small" id="bg-color-el" style="background-color: ${backgroundColor()}">
+  for (let i = 0; i < pokemons.length; i++) {
+    const pokemon = pokemons[i];
+    console.log(pokemon);
+
+    smallCards.innerHTML += /*html*/ `
+      <div class="pokemon-card-small" style="background-color: ${bgcolors[pokemon.types[0].type.name]}">
           <div class="imagecontainer-card-small">
-              <img id='image-el'
-                  src="${
-                    currentPokemon.sprites.other.dream_world.front_default
-                  }">
+              <img src="${pokemon.sprites.other.dream_world.front_default}">
           </div>
           <div class="info-card-small">
               <div class="number">
                   <div class="imagecontainer-animation-card-small">
-                      <img id="animation-el"
-                          src="https://raw.githubusercontent.com/geekygreek7/animated-pokemon-gifs/master/${currentPokemon.id}.gif">
-                  </div id ='number-el'>
-                # ${currentPokemon.id} </div>
-              <h3 class="name" id="name-el">${capitalize(
-                currentPokemon.name
-              )}</h3>
-              <small class="type" id='type-el'><span>Type: ${pokemonTypes()}</span> </small>
+                      <img src="https://raw.githubusercontent.com/geekygreek7/animated-pokemon-gifs/master/${pokemon.id}.gif">
+                  </div>
+                # ${pokemon.id}
+              </div>
+              <h3 class="name">${capitalize(pokemon.name)}</h3>
+              <small class="type"><span>Type: ${pokemonTypes(pokemon)}</span> </small>
           </div>
       </div>
-  `;
+    `;
+  }
 }
