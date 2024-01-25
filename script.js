@@ -106,3 +106,20 @@ document.getElementById('searchInput').addEventListener('input', function (e) {
   // Call the `renderSmallCards` function with the filtered results
   renderSmallCards(filteredPokemons);
 });
+
+
+function showLargeCard(pokemonid){
+  console.log(pokemonid);
+
+}
+
+
+// Function to close the large card
+function closeLargeCard() {
+  const enlargedContainer = document.getElementById('enlargedContainer');
+  enlargedContainer.classList.add('d-none');
+
+  const smallCardsContainer = document.getElementById('small-cards-el');
+  // smallCardsContainer.classList.remove('fade');
+  smallCardsContainer.classList.remove('invisible');
+}
