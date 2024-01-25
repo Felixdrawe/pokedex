@@ -4,7 +4,7 @@ function renderSmallCards(pokemons) {
 
   for (let i = 0; i < pokemons.length; i++) {
     const pokemon = pokemons[i];
-    console.log(pokemon);
+    // console.log(pokemon);
 
     smallCards.innerHTML += /*html*/ `
       <div class="pokemon-card-small" style="background-color: ${bgcolors[pokemon.types[0].type.name]}">
@@ -16,7 +16,7 @@ function renderSmallCards(pokemons) {
                   <div class="imagecontainer-animation-card-small">
                       <img src="https://raw.githubusercontent.com/geekygreek7/animated-pokemon-gifs/master/${pokemon.id}.gif">
                   </div>
-                # ${pokemon.id}
+                <h3># ${pokemon.id}</h3>
               </div>
               <h3 class="name">${capitalize(pokemon.name)}</h3>
               <small class="type"><span>Type: ${pokemonTypes(pokemon)}</span> </small>

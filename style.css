@@ -9,6 +9,7 @@ h1 {
   font-weight: 600;
 }
 
+
 body {
   font-family: noto-sans, sans-serif;
 
@@ -17,15 +18,14 @@ body {
   animation: ambientAnimation 16s ease infinite;
   background: linear-gradient(
     125deg,
-    /* Adjust the angle for more randomness */ #ff4422,
-    /* fire */ #00cc33,
-    /* grass */ #3399ff,
-    /* water */ #ff99cc,
-    /* fairy */ #ffcc33,
-    /* electric */ #ff5599,
-    /* psychic */ #775544 /* dark */
-      /* You can shuffle these colors or add more to increase randomness */
-  );
+        #ff4422 /* fire */,
+        #00cc33 /* grass */,
+        #3399ff /* water */,
+        #ff99cc /* fairy */,
+        #ffcc33 /* electric */,
+        #ff5599 /* psychic */,
+        #775544 /* other */
+      );
   background-size: 300% 300%;
 }
 
@@ -64,7 +64,6 @@ body {
 
 #pokemon-animation {
   width: 200px;
-
   margin: 10px -20px -20px 0px;
 }
 

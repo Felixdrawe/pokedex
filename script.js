@@ -2,10 +2,6 @@ function init() {
   loadPokemons();
 }
 
-const LOADMAX = 15;
-let allPokemons = [];
-let loadStartIndex = 0; // Starting index for loading pokemons
-
 const bgcolors = {
   fire: '#FF4422',
   grass: '#00CC33',
@@ -27,6 +23,10 @@ const bgcolors = {
   dark: '#775544',
 };
 
+const LOADMAX = 12;
+const loadedPokemons = [];
+let loadStartIndex = 1; // Starting index for loading pokemons
+
 // Load the first 15 pokemons
 async function loadPokemons() {
   for (let i = loadStartIndex; i < loadStartIndex + LOADMAX; i++) {
@@ -34,12 +34,12 @@ async function loadPokemons() {
     try {
       const response = await fetch(url);
       const pokemonData = await response.json();
-      allPokemons.push(pokemonData);
+      loadedPokemons.push(pokemonData);
     } catch (error) {
       console.error('Error fetching Pokémon data:', error);
     }
   }
-  renderSmallCards(allPokemons);
+  renderSmallCards(loadedPokemons);
   loadStartIndex += LOADMAX; // Update the starting index for the next load
 }
 
@@ -92,22 +92,17 @@ function pokemonMoves(pokemon) {
   return movesString;
 }
 
-
-
-
 // Assuming you have already loaded some Pokémon into `allPokemons`
 
-document.getElementById('searchInput').addEventListener('input', function(e) {
-    // Get the current input value and convert it to lowercase
-    const searchText = e.target.value.toLowerCase();
-  
-    // Filter the `allPokemons` array based on the search text
-    const filteredPokemons = allPokemons.filter(function(pokemon) { 
-      return pokemon.name.toLowerCase().includes(searchText);
-    });
-  
-    // Call the `renderSmallCards` function with the filtered results
-    renderSmallCards(filteredPokemons);
+document.getElementById('searchInput').addEventListener('input', function (e) {
+  // Get the current input value and convert it to lowercase
+  const searchText = e.target.value.toLowerCase();
+
+  // Filter the `allPokemons` array based on the search text
+  const filteredPokemons = loadedPokemons.filter(function (pokemon) {
+    return pokemon.name.toLowerCase().includes(searchText);
   });
-  
-  
+
+  // Call the `renderSmallCards` function with the filtered results
+  renderSmallCards(filteredPokemons);
+});

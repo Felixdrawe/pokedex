@@ -1,27 +1,25 @@
 let currentPokemon;
 
 const bgcolors = {
-  'fire': '#FF4422',
-  'grass': '#00CC33',
-  'electric': '#FFCC33',
-  'water': '#3399FF',
-  'ground': '#CC9966',
-  'rock': '#B6A136',
-  'fairy': '#FF99CC',
-  'poison': '#AA5599',
-  'bug': '#AABB22',
-  'dragon': '#7766EE',
-  'psychic': '#FF5599',
-  'flying': '#8899FF',
-  'fighting': '#BB5544',
-  'normal': '#AAAA99',
-  'ice': '#66CCFF',
-  'ghost': '#6666BB',
-  'steel': '#AAAABB',
-  'dark': '#775544'
+  fire: '#FF4422',
+  grass: '#00CC33',
+  electric: '#FFCC33',
+  water: '#3399FF',
+  ground: '#CC9966',
+  rock: '#B6A136',
+  fairy: '#FF99CC',
+  poison: '#AA5599',
+  bug: '#AABB22',
+  dragon: '#7766EE',
+  psychic: '#FF5599',
+  flying: '#8899FF',
+  fighting: '#BB5544',
+  normal: '#AAAA99',
+  ice: '#66CCFF',
+  ghost: '#6666BB',
+  steel: '#AAAABB',
+  dark: '#775544',
 };
-
-console.log(bgcolors.fire);
 
 async function loadPokemon() {
   const url = 'https://pokeapi.co/api/v2/pokemon/pikachu';
@@ -40,6 +38,7 @@ function renderPokemonInfo() {
   const weightEl = document.getElementById('weight-el');
   const abilitiesEl = document.getElementById('ability-el');
   const movesEl = document.getElementById('moves-el');
+  const statsEl = document.getElementById('stats-el');
 
   imageEl.src = currentPokemon.sprites.other.dream_world.front_default;
   numberEl.innerHTML = `# ${currentPokemon.id}`;
@@ -48,8 +47,20 @@ function renderPokemonInfo() {
   heightEl.innerHTML = `Height: ${currentPokemon.height}`;
   weightEl.innerHTML = `Weight: ${currentPokemon.weight}`;
   abilitiesEl.innerHTML = `Abilities: ${pokemonAbilities()}`;
-  movesEl.innerHTML = `${pokemonMoves()}`;
+  movesEl.innerHTML = `Moves: ${pokemonMoves()}`;
   document.body.style.backgroundColor = backgroundColor();
+  pokemonBaseStats()
+}
+
+let statsName = []
+let baseStats = []
+function pokemonBaseStats() {
+  for (let l = 0; l < currentPokemon.stats.length; l++) {
+    statsName.push(capitalize(currentPokemon.stats[l].stat.name));
+    baseStats.push(currentPokemon.stats[l].base_stat);
+  }
+  renderChart(statsName, baseStats);
+
 }
 
 function capitalize(str) {
@@ -60,22 +71,18 @@ function pokemonTypes() {
   let typesString = '';
   for (let j = 0; j < currentPokemon.types.length; j++) {
     let types = currentPokemon.types[j].type.name;
-    typesString += capitalize(types)
+    typesString += capitalize(types);
     if (j < currentPokemon.types.length - 1) {
       typesString += ' / ';
     }
   }
-
-  console.log(typesString);
   return typesString;
 }
 
 function backgroundColor() {
   // const color = colors[currentPokemon.types[0].type.name];
-  const colortype = currentPokemon.types[0].type.name
-  console.log(colortype);
+  const colortype = currentPokemon.types[0].type.name;
   return bgcolors[colortype];
-  
 }
 
 function pokemonAbilities() {
@@ -88,11 +95,8 @@ function pokemonAbilities() {
     }
   }
 
-  console.log(abilitiesString);
   return abilitiesString;
 }
-
-
 
 function pokemonTypes() {
   let typesString = '';
@@ -103,13 +107,8 @@ function pokemonTypes() {
       typesString += ' / ';
     }
   }
-
-  console.log(typesString);
   return typesString;
 }
-
-
-
 
 function pokemonMoves() {
   let movesString = '';
@@ -117,7 +116,5 @@ function pokemonMoves() {
     let moves = currentPokemon.moves[k].move.name;
     movesString += capitalize(moves) + '<br>';
   }
-  console.log(movesString);
   return movesString;
 }
-
