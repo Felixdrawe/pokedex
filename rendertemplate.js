@@ -32,37 +32,32 @@ function renderSmallCards(pokemons) {
   }
 }
 
-function showLargeCard(pokemonid) {
-  let pokemon = loadedPokemons[pokemonid - 1];
-  console.log(pokemon);
-  const enlargedContainer = document.getElementById('enlargedContainer');
-  enlargedContainer.classList.remove('d-none');
-  const smallCardsContainer = document.getElementById('small-cards-el');
-  smallCardsContainer.classList.add('fade');
-  smallCardsContainer.classList.add('invisible');
-
-  // HTML for the close button
-
-
-  enlargedContainer.innerHTML = /*html*/ `
+function generateLargeCardHTML(pokemon) {
+  return /*html*/ `
     <div class="pokemon-card-large" style="background-color: ${bgcolors[pokemon.types[0].type.name]}">
-    <span class="close-button" onclick="closeLargeCard()">&times;</span>
-      <div class="imagecontainer-card-small">
+      <div class="largeCardNav">
+        <img class="cardNavIcons" src="./img/chevleft.svg" onclick="closeLargeCard()">
+        <img class="cardNavIcons" src="./img/circle-xmark-solid.svg" onclick="closeLargeCard()">
+        <img class="cardNavIcons" src="./img/chevright.svg" onclick="closeLargeCard()">
+      </div>
+      <div class="topcontainer-card-large">
         <img src="${pokemon.sprites.other.dream_world.front_default}">
-      </div>
-      <div class="info-card-small">
-        <div class="number">
-          <div class="imagecontainer-animation-card-small">
-            <img src="https://raw.githubusercontent.com/geekygreek7/animated-pokemon-gifs/master/${pokemon.id}.gif">
+        <div class="topcontainer-card-large-infos">
+          <div class="number-large">
+            <h3># ${pokemon.id}</h3>
+            <div class="imagecontainer-animation-card-large">
+              <img src="https://raw.githubusercontent.com/geekygreek7/animated-pokemon-gifs/master/${pokemon.id}.gif">
+            </div>
           </div>
-          <h3># ${pokemon.id}</h3>
+          <h3 class="name">${capitalize(pokemon.name)}</h3>
+          <small class="type"><span>Type: ${pokemonTypes(pokemon)}</span></small>
         </div>
-        <h3 class="name">${capitalize(pokemon.name)}</h3>
-        <small class="type"><span>Type: ${pokemonTypes(pokemon)}</span></small>
       </div>
-    </div>`;
-
- 
+      <div class="bottomcontainer-card-large">
+        <div>
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+    </div>
+  `;
 }
-
-

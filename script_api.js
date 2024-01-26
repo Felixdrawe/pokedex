@@ -22,7 +22,7 @@ const bgcolors = {
 };
 
 async function loadPokemon() {
-  const url = 'https://pokeapi.co/api/v2/pokemon/pikachu';
+  const url = 'https://pokeapi.co/api/v2/pokemon/bulbasaur';
   const response = await fetch(url);
   currentPokemon = await response.json();
   console.log(currentPokemon);

@@ -1,0 +1,39 @@
+<div>
+  <canvas id="myChart"></canvas>
+</div>
+
+
+
+<div class="pokemon-card-large" style="background-color: ${
+  bgcolors[pokemon.types[0].type.name]}">
+
+  <div class="largeCardNav">
+
+    <img class="cardNavIcons" src="./img/chevleft.svg" onclick="closeLargeCard()">
+
+    <img class="cardNavIcons" src="./img/circle-xmark-solid.svg" onclick="closeLargeCard()">
+
+    <img class="cardNavIcons" src="./img/chevright.svg" onclick="closeLargeCard()">
+
+  </div>
+
+  <div class="topcontainer-card-large">
+    <img src="${pokemon.sprites.other.dream_world.front_default}">
+    <div class="topcontainer-card-large-infos">
+      <div class="number-large">
+        <h3># ${pokemon.id}</h3>
+        <div class="imagecontainer-animation-card-large">
+
+          <img src="https://raw.githubusercontent.com/geekygreek7/animated-pokemon-gifs/master/${
+                      pokemon.id
+                    }.gif">
+        </div>
+
+      </div>
+      <h3 class="name">${capitalize(pokemon.name)}</h3>
+      <small class="type"><span>Type: ${pokemonTypes(pokemon)}</span></small>
+    </div>
+
+
+
+  </div>

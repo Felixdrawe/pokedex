@@ -39,7 +39,8 @@ async function loadPokemons() {
       console.error('Error fetching Pokémon data:', error);
     }
   }
-  renderSmallCards(loadedPokemons);
+  // renderSmallCards(loadedPokemons);
+  showLargeCard(3)
   loadStartIndex += LOADMAX; // Update the starting index for the next load
 }
 
@@ -108,9 +109,20 @@ document.getElementById('searchInput').addEventListener('input', function (e) {
 });
 
 
-function showLargeCard(pokemonid){
-  console.log(pokemonid);
+// Modified showLargeCard function
+function showLargeCard(pokemonid) {
+  let pokemon = loadedPokemons[pokemonid - 1];
+  const enlargedContainer = document.getElementById('enlargedContainer');
+  enlargedContainer.classList.remove('d-none');
+  const smallCardsContainer = document.getElementById('small-cards-el');
+  smallCardsContainer.classList.add('fade');
+  smallCardsContainer.classList.add('invisible');
 
+  // Use the new function to generate HTML
+  enlargedContainer.innerHTML = generateLargeCardHTML(pokemon);
+
+  // Call pokemonBaseStats to render the chart
+  pokemonBaseStats(pokemon);
 }
 
 
@@ -122,4 +134,17 @@ function closeLargeCard() {
   const smallCardsContainer = document.getElementById('small-cards-el');
   // smallCardsContainer.classList.remove('fade');
   smallCardsContainer.classList.remove('invisible');
+}
+
+
+// Render Chart JS
+function pokemonBaseStats(currentPokemon) {
+  let statsName = []
+   let baseStats = []
+  for (let l = 0; l < currentPokemon.stats.length; l++) {
+    statsName.push(capitalize(currentPokemon.stats[l].stat.name));
+    baseStats.push(currentPokemon.stats[l].base_stat);
+  }
+  renderChart(statsName, baseStats);
+
 }
