@@ -39,8 +39,8 @@ async function loadPokemons() {
       console.error('Error fetching Pokémon data:', error);
     }
   }
-  // renderSmallCards(loadedPokemons);
-  showLargeCard(3)
+  renderSmallCards(loadedPokemons);
+  // showLargeCard(5)
   loadStartIndex += LOADMAX; // Update the starting index for the next load
 }
 
@@ -84,14 +84,17 @@ function pokemonAbilities(pokemon) {
   return abilitiesString;
 }
 
+
 function pokemonMoves(pokemon) {
-  let movesString = '';
+  let movesHtml = '';
   for (let k = 0; k < pokemon.moves.length; k++) {
-    let moves = pokemon.moves[k].move.name;
-    movesString += capitalize(moves) + '<br>';
+    let move = pokemon.moves[k].move.name;
+    movesHtml += `<div class="moves-bubble">${capitalize(move)}</div>`;
   }
-  return movesString;
+  return movesHtml;
 }
+
+
 
 // Assuming you have already loaded some Pokémon into `allPokemons`
 
@@ -147,4 +150,16 @@ function pokemonBaseStats(currentPokemon) {
   }
   renderChart(statsName, baseStats);
 
+}
+
+// Function to show base stats in large Card
+function showBaseStats() {
+  document.getElementById('base-stats-chart').style.display = '';
+  document.getElementById('pokemon-moves').style.display = 'none';
+}
+
+// Function to show moves in large Card
+function showMoves() {
+  document.getElementById('base-stats-chart').style.display = 'none';
+  document.getElementById('pokemon-moves').style.display = '';
 }

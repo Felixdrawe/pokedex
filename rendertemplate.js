@@ -41,7 +41,9 @@ function generateLargeCardHTML(pokemon) {
         <img class="cardNavIcons" src="./img/chevright.svg" onclick="closeLargeCard()">
       </div>
       <div class="topcontainer-card-large">
+<div class="imagecontainer-card-large">
         <img src="${pokemon.sprites.other.dream_world.front_default}">
+        </div>
         <div class="topcontainer-card-large-infos">
           <div class="number-large">
             <h3># ${pokemon.id}</h3>
@@ -50,12 +52,28 @@ function generateLargeCardHTML(pokemon) {
             </div>
           </div>
           <h3 class="name">${capitalize(pokemon.name)}</h3>
-          <small class="type"><span>Type: ${pokemonTypes(pokemon)}</span></small>
+          <small class="type">Type:<span> ${pokemonTypes(pokemon)}</span></small>
+          <small class="type">Abilities:<span> ${pokemonAbilities(pokemon)}</span></small>
         </div>
       </div>
       <div class="bottomcontainer-card-large">
-        <div>
-          <canvas id="myChart"></canvas>
+        <!-- Bottom Navigation with Buttons for Base Stats and Moves -->
+        <div class="bottom-card-nav">
+            <div class="bottom-card-nav-btn" onclick="showBaseStats()">
+                <h3>Base Stats</h3>
+            </div>
+            <div class="bottom-card-nav-btn" onclick="showMoves()">
+                <h3>Moves</h3>
+            </div>
+        </div>
+        <!-- Base Stats Chart Section -->
+        <div class="chart" id="base-stats-chart">
+            <h3>Base Stats</h3>
+            <canvas id="myChart"></canvas>
+        </div>
+        <!-- Moves Section, hidden by default -->
+        <div class="moves" id="pokemon-moves" style="display: none;">
+            ${pokemonMoves(pokemon)}
         </div>
       </div>
     </div>
