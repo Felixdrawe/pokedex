@@ -42,11 +42,11 @@ function showLargeCard(pokemonid) {
   smallCardsContainer.classList.add('invisible');
 
   // HTML for the close button
-  const closeButtonHtml = '<span class="close-button" onclick="closeLargeCard()">&times;</span>';
+
 
   enlargedContainer.innerHTML = /*html*/ `
     <div class="pokemon-card-large" style="background-color: ${bgcolors[pokemon.types[0].type.name]}">
-      ${closeButtonHtml}
+    <span class="close-button" onclick="closeLargeCard()">&times;</span>
       <div class="imagecontainer-card-small">
         <img src="${pokemon.sprites.other.dream_world.front_default}">
       </div>
