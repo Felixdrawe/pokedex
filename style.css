@@ -59,6 +59,13 @@ body {
   top: 0;
   z-index: 100;
   /* border: 1px solid green; */
+
+  transition: transform 0.3s ease; /* Add transition for smooth animation */
+  transform: translateY(-100%); /* Move the navigation bar above the viewport initially */
+}
+
+.navigation-search.visible {
+  transform: translateY(0); /* Bring the navigation bar back into view */
 }
 
 .navigation-search img {
