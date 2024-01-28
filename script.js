@@ -23,6 +23,7 @@ const bgcolors = {
 const LOADMAX = 12;
 const loadedPokemons = [];
 let loadStartIndex = 1;
+let currentPokemonId = 1;
 
 // Initialize the app
 function init() {
@@ -42,7 +43,6 @@ async function loadPokemons() {
     }
   }
   renderSmallCards(loadedPokemons);
-  // showLargeCard(5)
   loadStartIndex += LOADMAX;
 }
 
@@ -97,18 +97,21 @@ window.addEventListener('scroll', () => {
 });
 
 let lastScrollPosition = 0;
+const scrollThreshold = 10; // Adjust this threshold as needed
+
 window.addEventListener('scroll', () => {
   const currentScrollPosition = window.scrollY;
+  const scrollDifference = Math.abs(currentScrollPosition - lastScrollPosition);
 
-  if (currentScrollPosition > lastScrollPosition) {
-    // Scrolling down
-    document.querySelector('.navigation-search').classList.remove('visible');
-  } else {
-    // Scrolling up
-    document.querySelector('.navigation-search').classList.add('visible');
+  if (scrollDifference > scrollThreshold) {
+    if (currentScrollPosition > lastScrollPosition) {
+      document.querySelector('.navigation-search').classList.remove('visible');
+    } else {
+      document.querySelector('.navigation-search').classList.add('visible');
+    }
+
+    lastScrollPosition = currentScrollPosition;
   }
-
-  lastScrollPosition = currentScrollPosition;
 });
 
 
@@ -121,8 +124,9 @@ document.getElementById('searchInput').addEventListener('input', function (e) {
   renderSmallCards(filteredPokemons);
 });
 
-// showLargeCard function
+
 function showLargeCard(pokemonid) {
+  currentPokemonId = pokemonid;
   let pokemon = loadedPokemons[pokemonid - 1];
   const enlargedContainer = document.getElementById('enlargedContainer');
   enlargedContainer.classList.remove('d-none');
@@ -156,7 +160,7 @@ function showMoves() {
   document.getElementById('pokemon-moves').style.display = '';
 }
 
-// Function to close the large card
+// Close the large card
 function closeLargeCard() {
   const enlargedContainer = document.getElementById('enlargedContainer');
   enlargedContainer.classList.add('d-none');
@@ -164,6 +168,11 @@ function closeLargeCard() {
   smallCardsContainer.classList.remove('invisible');
 }
 
+function doNotClose(event) {
+  event.stopPropagation();
+}
+
+// Next/Prev buttons to navigate through the large cards
 function nextLargeCard(pokemonid) {
   if (pokemonid < loadedPokemons.length) {
     pokemonid++;
@@ -181,3 +190,23 @@ function previousLargeCard(pokemonid) {
   }
   showLargeCard(pokemonid);
 }
+
+// Event listener for keydown to navigate through the large cards
+document.addEventListener('keydown', function (event) {
+  if (
+    !document.getElementById('enlargedContainer').classList.contains('d-none')
+  ) {
+    let pressedKey = event.key;
+    if (pressedKey === 'ArrowLeft') {
+      previousLargeCard(currentPokemonId);
+    } else if (pressedKey === 'ArrowRight') {
+      nextLargeCard(currentPokemonId);
+    } else if (pressedKey === 'Escape') {
+      closeLargeCard(currentPokemonId);
+    }
+  }
+});
+
+
+
+

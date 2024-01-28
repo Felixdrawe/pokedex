@@ -30,7 +30,7 @@ function renderSmallCards(pokemonsAllObjects) {
 
 function renderLargeCards(pokemonObject) {
   return /*html*/ `
-    <div class="pokemon-card-large" style="background-color: ${bgcolors[pokemonObject.types[0].type.name]}">
+    <div class="pokemon-card-large" onclick="doNotClose(event)" style="background-color: ${bgcolors[pokemonObject.types[0].type.name]}">
       <div class="largeCardNav">
         <img class="cardNavIcons" src="./img/chevleft.svg" onclick="previousLargeCard(${pokemonObject.id})">
         <img class="cardNavIcons" src="./img/circle-xmark-solid.svg" onclick="closeLargeCard()">
