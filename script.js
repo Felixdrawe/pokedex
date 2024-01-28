@@ -1,6 +1,4 @@
-function init() {
-  loadPokemons();
-}
+// Global variables
 
 const bgcolors = {
   fire: '#FF4422',
@@ -25,7 +23,12 @@ const bgcolors = {
 
 const LOADMAX = 12;
 const loadedPokemons = [];
-let loadStartIndex = 1; // Starting index for loading pokemons
+let loadStartIndex = 1;
+
+// Initialize the app
+function init() {
+  loadPokemons();
+}
 
 // Load the first 15 pokemons
 async function loadPokemons() {
@@ -41,15 +44,15 @@ async function loadPokemons() {
   }
   renderSmallCards(loadedPokemons);
   // showLargeCard(5)
-  loadStartIndex += LOADMAX; // Update the starting index for the next load
+  loadStartIndex += LOADMAX;
 }
 
-// Infinite scroll implementation
-window.addEventListener('scroll', () => {
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-    loadPokemons();
-  }
-});
+
+// Helper functions to generate Data from the API
+function backgroundColor(pokemon) {
+  const colortype = pokemon.types[0].type.name;
+  return bgcolors[colortype];
+}
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -67,10 +70,6 @@ function pokemonTypes(pokemon) {
   return typesString;
 }
 
-function backgroundColor(pokemon) {
-  const colortype = pokemon.types[0].type.name;
-  return bgcolors[colortype];
-}
 
 function pokemonAbilities(pokemon) {
   let abilitiesString = '';
@@ -84,7 +83,6 @@ function pokemonAbilities(pokemon) {
   return abilitiesString;
 }
 
-
 function pokemonMoves(pokemon) {
   let movesHtml = '';
   for (let k = 0; k < pokemon.moves.length; k++) {
@@ -94,25 +92,23 @@ function pokemonMoves(pokemon) {
   return movesHtml;
 }
 
+// Infinite scroll to load more pokemons
+window.addEventListener('scroll', () => {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    loadPokemons();
+  }
+});
 
-
-// Assuming you have already loaded some Pokémon into `allPokemons`
-
+// Event listener for the search input
 document.getElementById('searchInput').addEventListener('input', function (e) {
-  // Get the current input value and convert it to lowercase
   const searchText = e.target.value.toLowerCase();
-
-  // Filter the `allPokemons` array based on the search text
   const filteredPokemons = loadedPokemons.filter(function (pokemon) {
     return pokemon.name.toLowerCase().includes(searchText);
   });
-
-  // Call the `renderSmallCards` function with the filtered results
   renderSmallCards(filteredPokemons);
 });
 
-
-// Modified showLargeCard function
+// showLargeCard function
 function showLargeCard(pokemonid) {
   let pokemon = loadedPokemons[pokemonid - 1];
   const enlargedContainer = document.getElementById('enlargedContainer');
@@ -120,36 +116,19 @@ function showLargeCard(pokemonid) {
   const smallCardsContainer = document.getElementById('small-cards-el');
   smallCardsContainer.classList.add('fade');
   smallCardsContainer.classList.add('invisible');
-
-  // Use the new function to generate HTML
-  enlargedContainer.innerHTML = generateLargeCardHTML(pokemon);
-
-  // Call pokemonBaseStats to render the chart
+  enlargedContainer.innerHTML = renderLargeCards(pokemon);
   pokemonBaseStats(pokemon);
 }
 
-
-// Function to close the large card
-function closeLargeCard() {
-  const enlargedContainer = document.getElementById('enlargedContainer');
-  enlargedContainer.classList.add('d-none');
-
-  const smallCardsContainer = document.getElementById('small-cards-el');
-  // smallCardsContainer.classList.remove('fade');
-  smallCardsContainer.classList.remove('invisible');
-}
-
-
 // Render Chart JS
 function pokemonBaseStats(currentPokemon) {
-  let statsName = []
-   let baseStats = []
+  let statsName = [];
+  let baseStats = [];
   for (let l = 0; l < currentPokemon.stats.length; l++) {
     statsName.push(capitalize(currentPokemon.stats[l].stat.name));
     baseStats.push(currentPokemon.stats[l].base_stat);
   }
   renderChart(statsName, baseStats);
-
 }
 
 // Function to show base stats in large Card
@@ -162,4 +141,13 @@ function showBaseStats() {
 function showMoves() {
   document.getElementById('base-stats-chart').style.display = 'none';
   document.getElementById('pokemon-moves').style.display = '';
+}
+
+
+// Function to close the large card
+function closeLargeCard() {
+  const enlargedContainer = document.getElementById('enlargedContainer');
+  enlargedContainer.classList.add('d-none');
+  const smallCardsContainer = document.getElementById('small-cards-el');
+  smallCardsContainer.classList.remove('invisible');
 }

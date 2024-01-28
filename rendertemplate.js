@@ -32,7 +32,7 @@ function renderSmallCards(pokemons) {
   }
 }
 
-function generateLargeCardHTML(pokemon) {
+function renderLargeCards(pokemon) {
   return /*html*/ `
     <div class="pokemon-card-large" style="background-color: ${bgcolors[pokemon.types[0].type.name]}">
       <div class="largeCardNav">
