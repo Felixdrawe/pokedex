@@ -305,13 +305,16 @@ body {
   align-items: center;
   margin-top: 15px;
 }
+
+
 .cardNavIcons{
   height: 45px;
   width: auto;
-
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
+  opacity: 0.8;
+  /* transition: opacity 0.2s ease; */
   cursor: pointer;
+  z-index: 1000;
+  
 }
 
 .cardNavIcons:hover{
