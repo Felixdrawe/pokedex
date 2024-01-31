@@ -43,7 +43,6 @@ async function loadPokemons() {
     }
   }
   showSmallCards(loadedPokemons);
-  // showLargeCard(1);
   loadStartIndex += LOADMAX;
 }
 

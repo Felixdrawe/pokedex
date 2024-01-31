@@ -4,10 +4,12 @@ function renderSmallCards(pokemonObject) {
         pokemonObject.id
       })"
       style="background-color: ${bgcolors[pokemonObject.types[0].type.name]}">
+      <div class="imagecontainer-card-small-outer">
           <div class="imagecontainer-card-small">
               <img src="${
                 pokemonObject.sprites.other.dream_world.front_default
               }">
+          </div>
           </div>
           <div class="info-card-small">
               <div class="number">
