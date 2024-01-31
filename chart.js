@@ -50,7 +50,7 @@ function renderChart(statsName, baseStats) {
             display: true,
             font: {
               family: 'Noto Sans, sans-serif',
-              size: 4, // Adjust font size as needed
+              size: 14, // Adjust font size as needed
             },
           },
           beginAtZero: true,

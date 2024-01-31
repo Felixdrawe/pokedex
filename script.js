@@ -65,9 +65,14 @@ function showLargeCard(pokemonid) {
   const smallCardsContainer = document.getElementById('small-cards-el');
   smallCardsContainer.classList.add('fade');
   smallCardsContainer.classList.add('invisible');
+  const navigationSearch = document.querySelector('.navigation-search');
+  navigationSearch.classList.add('fade');
+  navigationSearch.classList.add('invisible');
+  document.body.classList.add('no-scroll');
   enlargedContainer.innerHTML = renderLargeCards(pokemon);
   pokemonBaseStats(pokemon);
 }
+
 
 // Render Chart JS in large card
 function pokemonBaseStats(currentPokemon) {
@@ -98,7 +103,11 @@ function closeLargeCard() {
   enlargedContainer.classList.add('d-none');
   const smallCardsContainer = document.getElementById('small-cards-el');
   smallCardsContainer.classList.remove('invisible');
+  const navigationSearch = document.querySelector('.navigation-search');
+  navigationSearch.classList.remove('invisible');
+  document.body.classList.remove('no-scroll');
 }
+
 
 function doNotClose(event) {
   event.stopPropagation();
