@@ -42,8 +42,67 @@ async function loadPokemons() {
       console.error('Error fetching Pokémon data:', error);
     }
   }
-  renderSmallCards(loadedPokemons);
+  showSmallCards(loadedPokemons);
+  // showLargeCard(1);
   loadStartIndex += LOADMAX;
+}
+
+// Generate the small cards
+function showSmallCards(pokemonsAllObjects) {
+  const smallCards = document.getElementById('small-cards-el');
+  smallCards.innerHTML = '';
+  for (let i = 0; i < pokemonsAllObjects.length; i++) {
+    const pokemonObject = pokemonsAllObjects[i];
+    smallCards.innerHTML += renderSmallCards(pokemonObject);
+  }
+}
+
+// Generate the large cards
+function showLargeCard(pokemonid) {
+  currentPokemonId = pokemonid;
+  let pokemon = loadedPokemons[pokemonid - 1];
+  const enlargedContainer = document.getElementById('enlargedContainer');
+  enlargedContainer.classList.remove('d-none');
+  const smallCardsContainer = document.getElementById('small-cards-el');
+  smallCardsContainer.classList.add('fade');
+  smallCardsContainer.classList.add('invisible');
+  enlargedContainer.innerHTML = renderLargeCards(pokemon);
+  pokemonBaseStats(pokemon);
+}
+
+// Render Chart JS in large card
+function pokemonBaseStats(currentPokemon) {
+  let statsName = [];
+  let baseStats = [];
+  for (let l = 0; l < currentPokemon.stats.length; l++) {
+    statsName.push(capitalize(currentPokemon.stats[l].stat.name));
+    baseStats.push(currentPokemon.stats[l].base_stat);
+  }
+  renderChart(statsName, baseStats);
+}
+
+// Function to show "Base stats" in large Card
+function showBaseStats() {
+  document.getElementById('base-stats-chart').style.display = '';
+  document.getElementById('pokemon-moves').style.display = 'none';
+}
+
+// Function to show "Moves "in large Card
+function showMoves() {
+  document.getElementById('base-stats-chart').style.display = 'none';
+  document.getElementById('pokemon-moves').style.display = '';
+}
+
+// Close the large card
+function closeLargeCard() {
+  const enlargedContainer = document.getElementById('enlargedContainer');
+  enlargedContainer.classList.add('d-none');
+  const smallCardsContainer = document.getElementById('small-cards-el');
+  smallCardsContainer.classList.remove('invisible');
+}
+
+function doNotClose(event) {
+  event.stopPropagation();
 }
 
 // Helper functions to generate Data from the API
@@ -97,7 +156,7 @@ window.addEventListener('scroll', () => {
 });
 
 let lastScrollPosition = 0;
-const scrollThreshold = 10; // Adjust this threshold as needed
+const scrollThreshold = 10;
 
 window.addEventListener('scroll', () => {
   const currentScrollPosition = window.scrollY;
@@ -109,11 +168,9 @@ window.addEventListener('scroll', () => {
     } else {
       document.querySelector('.navigation-search').classList.add('visible');
     }
-
     lastScrollPosition = currentScrollPosition;
   }
 });
-
 
 // Event listener for the search input
 document.getElementById('searchInput').addEventListener('input', function (e) {
@@ -121,56 +178,8 @@ document.getElementById('searchInput').addEventListener('input', function (e) {
   const filteredPokemons = loadedPokemons.filter(function (pokemon) {
     return pokemon.name.toLowerCase().includes(searchText);
   });
-  renderSmallCards(filteredPokemons);
+  showSmallCards(filteredPokemons);
 });
-
-
-function showLargeCard(pokemonid) {
-  currentPokemonId = pokemonid;
-  let pokemon = loadedPokemons[pokemonid - 1];
-  const enlargedContainer = document.getElementById('enlargedContainer');
-  enlargedContainer.classList.remove('d-none');
-  const smallCardsContainer = document.getElementById('small-cards-el');
-  smallCardsContainer.classList.add('fade');
-  smallCardsContainer.classList.add('invisible');
-  enlargedContainer.innerHTML = renderLargeCards(pokemon);
-  pokemonBaseStats(pokemon);
-}
-
-// Render Chart JS
-function pokemonBaseStats(currentPokemon) {
-  let statsName = [];
-  let baseStats = [];
-  for (let l = 0; l < currentPokemon.stats.length; l++) {
-    statsName.push(capitalize(currentPokemon.stats[l].stat.name));
-    baseStats.push(currentPokemon.stats[l].base_stat);
-  }
-  renderChart(statsName, baseStats);
-}
-
-// Function to show "Base stats" in large Card
-function showBaseStats() {
-  document.getElementById('base-stats-chart').style.display = '';
-  document.getElementById('pokemon-moves').style.display = 'none';
-}
-
-// Function to show "Moves "in large Card
-function showMoves() {
-  document.getElementById('base-stats-chart').style.display = 'none';
-  document.getElementById('pokemon-moves').style.display = '';
-}
-
-// Close the large card
-function closeLargeCard() {
-  const enlargedContainer = document.getElementById('enlargedContainer');
-  enlargedContainer.classList.add('d-none');
-  const smallCardsContainer = document.getElementById('small-cards-el');
-  smallCardsContainer.classList.remove('invisible');
-}
-
-function doNotClose(event) {
-  event.stopPropagation();
-}
 
 // Next/Prev buttons to navigate through the large cards
 function nextLargeCard(pokemonid) {
@@ -206,7 +215,3 @@ document.addEventListener('keydown', function (event) {
     }
   }
 });
-
-
-
-
